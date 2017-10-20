@@ -25,11 +25,13 @@
     <typeAliases>
         <typeAlias alias="role" type="com.leon.mybatisspring.pojo.RoleBean"/>
         <typeAlias alias="user" type="com.leon.mybatisspring.pojo.UserBean"/>
+        <typeAlias alias="file" type="com.leon.mybatisspring.pojo.FileBean"/>
     </typeAliases>
 
     <mappers>
         <mapper resource="mapper/role.xml"/>
         <mapper resource="mapper/user.xml"/>
+        <mapper resource="mapper/file.xml"/>
     </mappers>
 
 </configuration>

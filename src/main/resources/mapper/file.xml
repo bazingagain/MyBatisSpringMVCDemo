@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leon.mybatisspring.dao.FileDao">
+
+    <select id="getFile" parameterType="int" resultType="file">
+        SELECT id, title, file_path as filePath
+        FROM t_file
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insertFile" parameterType="file">
+        INSERT INTO t_file(title, file_path)
+        VALUES (#{title}, #{filePath})
+    </insert>
+
+    <delete id="deleteFile" parameterType="int">
+        DELETE FROM t_file
+        WHERE id = #{id}
+    </delete>
+</mapper>
