@@ -15,6 +15,14 @@
          WHERE role_name LIKE concat('%', #{roleName}, '%')
     </select>
 
+    <select id="selectRoleByMap" parameterType="map" resultType="role">
+        SELECT id, role_name as roleName, create_date as createDate, note
+        FROM t_role
+        <if test="roleName != null">
+            WHERE role_name LIKE concat('%', #{roleName}, '%')
+        </if>
+    </select>
+
     <update id="updateRole" parameterType="role">
         UPDATE t_role
         <set>

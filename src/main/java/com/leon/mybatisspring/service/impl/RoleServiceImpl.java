@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created on 17/10/2017.
@@ -28,6 +29,11 @@ public class RoleServiceImpl implements RoleService {
     public List<RoleBean> findRoles(String roleName, int start, int limit) {
         return roleDao.findRoles(roleName, new RowBounds(start, limit));
     }
+
+    public List<RoleBean> selectRoleByMap(Map<String, Object> params) {
+        return roleDao.selectRoleByMap(params);
+    }
+
 
     public int insertRole(RoleBean roleBean) {
         return roleDao.insertRole(roleBean);

@@ -3,7 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
     <settings>
         <!-- Globally enables or disables any caches configured in any mapper under this configuration -->
         <setting name="cacheEnabled" value="true"/>
@@ -20,13 +19,21 @@
         <setting name="lazyLoadingEnabled" value="true"/>
     </settings>
 
-    <!-- Continue going here -->
 
     <typeAliases>
         <typeAlias alias="role" type="com.leon.mybatisspring.pojo.RoleBean"/>
         <typeAlias alias="user" type="com.leon.mybatisspring.pojo.UserBean"/>
         <typeAlias alias="file" type="com.leon.mybatisspring.pojo.FileBean"/>
     </typeAliases>
+
+    <plugins>
+        <plugin interceptor="com.leon.mybatisspring.plugin.PagingPlugin">
+            <property name="default.page" value="1"/>
+            <property name="default.pageSize" value="20"/>
+            <property name="default.useFlag" value="false"/>
+            <property name="default.checkFlag" value="false"/>
+        </plugin>
+    </plugins>
 
     <mappers>
         <mapper resource="mapper/role.xml"/>
