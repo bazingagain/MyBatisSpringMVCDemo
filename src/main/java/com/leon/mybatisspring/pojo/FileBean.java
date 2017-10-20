@@ -1,13 +1,11 @@
 package com.leon.mybatisspring.pojo;
 
-import org.springframework.stereotype.Repository;
 
 /**
  * Created on 20/10/2017.
  *
  * @author Xiaolei-Peng
  */
-@Repository
 public class FileBean {
     private Integer id;
     private String title;

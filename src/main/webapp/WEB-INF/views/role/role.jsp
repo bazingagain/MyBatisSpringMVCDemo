@@ -33,5 +33,6 @@
         </tr>
         </tbody>
     </table>
+<a href="/uploadFile.jsp">jump upload file</a>
 </body>
 </html>

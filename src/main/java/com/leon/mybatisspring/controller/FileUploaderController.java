@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.Date;
 
 /**
@@ -26,13 +28,18 @@ public class FileUploaderController {
     FileUploaderService uploaderService;
 
     @RequestMapping("/upload")
+    @ResponseBody
     private Message uploadFile(@RequestParam("title") String title, HttpServletRequest request) {
         MultipartHttpServletRequest multipartHttpRequest = (MultipartHttpServletRequest) request;
         MultipartFile imgFile = multipartHttpRequest.getFile("imageFile");
         FileBean fileBean = new FileBean();
         fileBean.setTitle(title);
-        String path = request.getSession().getServletContext().getRealPath("/");
-        String filepath = path + "upload/" + new Date().getTime() + imgFile.getOriginalFilename();
+        String path = request.getServletContext().getRealPath("/") + "upload";
+        String filepath = path + File.separator + new Date().getTime() + imgFile.getOriginalFilename();
+        File uploadDir = new File(path);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdir();
+        }
         fileBean.setFilePath(filepath);
         Message msg = new Message();
         if (uploaderService.insertFile(imgFile, fileBean)) {
