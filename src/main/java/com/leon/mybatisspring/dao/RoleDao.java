@@ -2,6 +2,7 @@ package com.leon.mybatisspring.dao;
 
 import com.leon.mybatisspring.pojo.PageParams;
 import com.leon.mybatisspring.pojo.RoleBean;
+import com.leon.mybatisspring.pojo.TestParams;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
@@ -22,7 +23,8 @@ public interface RoleDao {
     int deleteRole(Integer id);
     RoleBean getRole(Integer id);
     List<RoleBean> findRoles(String roleName, RowBounds rowBounds);
-//    List<RoleBean> selectAllRoles();
+    List<RoleBean> findRoleByUserId(Integer userId);
+    List<RoleBean> selectRoleByPOJO(TestParams params);
     List<RoleBean> selectRoleByMap(Map<String, Object> params);
-//    List<RoleBean> selectAllRoles(Map<String, Object> params);
+    List<RoleBean> selectRolesByAnnotation(@Param("roleName") String roleName, @Param("$pageParams") PageParams params);
 }

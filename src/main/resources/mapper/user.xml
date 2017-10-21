@@ -3,7 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.leon.mybatisspring.dao.UserDao">
-    <select id="getUser" parameterType="int" resultType="user">
+
+    <resultMap id="userMap" type="user">
+        <id property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="birthday" column="birthday"/>
+        <result property="sex" column="sex"/>
+        <result property="mobile" column="mobile"/>
+        <result property="email" column="email"/>
+        <result property="note" column="note"/>
+        <collection property="roleList" column="id" fetchType="lazy"
+                    select="com.leon.mybatisspring.dao.RoleDao.findRoleByUserId"/>
+    </resultMap>
+
+    <select id="getUser" parameterType="int" resultMap="userMap">
         SELECT id, user_name as userName, birthday, sex, mobile, email, note
         FROM t_user
         WHERE id = #{id}
@@ -17,6 +30,12 @@
                 user_name LIKE concat('%', #{userName}, '%')
             </if>
         </where>
+    </select>
+
+    <select id="findUserByRoleId" parameterType="int" resultMap="userMap">
+        SELECT a.id, a.user_name, a.sex, a.birthday, a.mobile, a.email, a.note
+        FROM t_user a, t_user_role b
+        WHERE a.id = b.user_id and b.role_id = #{roleId}
     </select>
 
     <update id="updateUser" parameterType="user">

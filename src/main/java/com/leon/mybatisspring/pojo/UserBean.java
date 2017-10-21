@@ -1,6 +1,7 @@
 package com.leon.mybatisspring.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created on 17/10/2017.
@@ -14,6 +15,7 @@ public class UserBean {
     private String sex;
     private String email;
     private String note;
+    private List<RoleBean> roleList;
 
     public Integer getId() {
         return id;
@@ -61,5 +63,13 @@ public class UserBean {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public List<RoleBean> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<RoleBean> roleList) {
+        this.roleList = roleList;
     }
 }

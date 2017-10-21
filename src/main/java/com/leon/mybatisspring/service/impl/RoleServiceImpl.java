@@ -1,7 +1,9 @@
 package com.leon.mybatisspring.service.impl;
 
 import com.leon.mybatisspring.dao.RoleDao;
+import com.leon.mybatisspring.pojo.PageParams;
 import com.leon.mybatisspring.pojo.RoleBean;
+import com.leon.mybatisspring.pojo.TestParams;
 import com.leon.mybatisspring.service.RoleService;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,14 @@ public class RoleServiceImpl implements RoleService {
 
     public List<RoleBean> selectRoleByMap(Map<String, Object> params) {
         return roleDao.selectRoleByMap(params);
+    }
+
+    public List<RoleBean> selectRoleByPOJO(TestParams params) {
+        return roleDao.selectRoleByPOJO(params);
+    }
+
+    public List<RoleBean> selectRolesByAnnotation(String roleName, PageParams params) {
+        return roleDao.selectRolesByAnnotation(roleName, params);
     }
 
 

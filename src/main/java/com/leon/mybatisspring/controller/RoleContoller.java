@@ -2,7 +2,10 @@ package com.leon.mybatisspring.controller;
 
 import com.leon.mybatisspring.pojo.PageParams;
 import com.leon.mybatisspring.pojo.RoleBean;
+import com.leon.mybatisspring.pojo.TestParams;
+import com.leon.mybatisspring.pojo.UserBean;
 import com.leon.mybatisspring.service.RoleService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +33,10 @@ public class RoleContoller {
     public ModelAndView getRole(@RequestParam("id") int id) {
         RoleBean role = roleService.getRole(id);
         ModelAndView mv = new ModelAndView("role/role");
+        List<UserBean> list = role.getUserList();
+        for (UserBean user : list) {
+            System.out.println(user.getUserName());
+        }
         mv.addObject("role", role);
         return mv;
     }
@@ -56,6 +63,35 @@ public class RoleContoller {
         System.out.println("total page number:" + pageParams.getTotalPage());
         return list;
     }
+    @RequestMapping(value = "/selectRolesByPOJO")
+    @ResponseBody
+    public List<RoleBean> selectRolesByPOJO(@RequestParam("roleName") String roleName) {
+        TestParams pageParams = new TestParams();
+        pageParams.setUseFlag(true);
+        pageParams.setCheckFlag(false);
+        pageParams.setPage(2);
+        pageParams.setPageSize(5);
+        pageParams.setRoleName("teacher");
+        List list = roleService.selectRoleByPOJO(pageParams);
+        System.out.println("total item number:" + pageParams.getTotal());
+        System.out.println("total page number:" + pageParams.getTotalPage());
+        return list;
+    }
+
+    @RequestMapping(value = "/selectRolesByAnnotation")
+    @ResponseBody
+    public List<RoleBean> selectRolesByAnnotation(@RequestParam("roleName") String roleName) {
+        PageParams pageParams = new PageParams();
+        pageParams.setUseFlag(true);
+        pageParams.setCheckFlag(false);
+        pageParams.setPage(1);
+        pageParams.setPageSize(5);
+        List list = roleService.selectRolesByAnnotation("teacher", pageParams);
+        System.out.println("total item number:" + pageParams.getTotal());
+        System.out.println("total page number:" + pageParams.getTotalPage());
+        return list;
+    }
+
 
     @RequestMapping(value = "/updateRole")
     @ResponseBody

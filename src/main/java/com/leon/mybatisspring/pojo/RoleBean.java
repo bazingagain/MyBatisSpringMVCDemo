@@ -1,6 +1,7 @@
 package com.leon.mybatisspring.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created on 17/10/2017.
@@ -10,6 +11,10 @@ import java.util.Date;
 public class RoleBean {
     private Integer id;
     private String roleName;
+    private Date createDate;
+    private String note;
+
+    private List<UserBean> userList;
 
     public Integer getId() {
         return id;
@@ -43,8 +48,11 @@ public class RoleBean {
         this.note = note;
     }
 
-    private Date createDate;
-    private String note;
+    public List<UserBean> getUserList() {
+        return userList;
+    }
 
-
+    public void setUserList(List<UserBean> userList) {
+        this.userList = userList;
+    }
 }

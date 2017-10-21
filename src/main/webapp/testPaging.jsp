@@ -12,12 +12,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-<button id="map" onclick="testMap()">Test Map</button>
+<button onclick="test(this)" value="/role/selectRolesByMap">Test Map</button>
+<button onclick="test(this)" value="/role/selectRolesByPOJO">Test POJO</button>
+<button onclick="test(this)" value="/role/selectRolesByAnnotation">Test Annotation</button>
 </body>
 
 <script>
-    function testMap() {
-        $.post("/role/selectRolesByMap", {roleName : null}, function (data) {
+    function test(e) {
+        console.log($(e).val());
+        $.post($(e).val(), {roleName : null}, function (data) {
             console.log(data);
         })
     }

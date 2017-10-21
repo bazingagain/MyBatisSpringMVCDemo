@@ -30,6 +30,7 @@
             <td><c:out value="${role.roleName}"/></td>
             <td><c:out value="${role.note}"/></td>
             <td><c:out value="${role.createDate}"/></td>
+            <td><c:out value="${role.userList}"/></td>
         </tr>
         </tbody>
     </table>

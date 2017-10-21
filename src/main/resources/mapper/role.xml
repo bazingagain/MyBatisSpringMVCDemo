@@ -3,7 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.leon.mybatisspring.dao.RoleDao">
-    <select id="getRole" parameterType="int" resultType="role">
+    <resultMap id="roleMap" type="role">
+        <id property="id" column="id"/>
+        <result property="roleName" column="role_name"/>
+        <result property="createDate" column="create_date"/>
+        <result property="note" column="note"/>
+        <collection property="userList" column="id" fetchType="lazy"
+                    select="com.leon.mybatisspring.dao.UserDao.findUserByRoleId"/>
+    </resultMap>
+
+    <select id="getRole" parameterType="int" resultMap="roleMap">
         SELECT id, role_name as roleName, create_date as createDate, note
          FROM t_role
          WHERE id = #{id}
@@ -15,6 +24,13 @@
          WHERE role_name LIKE concat('%', #{roleName}, '%')
     </select>
 
+    <select id="findRoleByUserId" parameterType="int" resultMap="roleMap">
+        SELECT a.id, a.role_name, create_date, note
+        FROM t_role a, t_user_role b
+        WHERE a.id = b.role_id and b.user_id = #{userId}
+    </select>
+
+
     <select id="selectRoleByMap" parameterType="map" resultType="role">
         SELECT id, role_name as roleName, create_date as createDate, note
         FROM t_role
@@ -22,6 +38,24 @@
             WHERE role_name LIKE concat('%', #{roleName}, '%')
         </if>
     </select>
+
+    <select id="selectRolesByAnnotation" resultType="role">
+        SELECT id, role_name as roleName, create_date as createDate, note
+        FROM t_role
+        <if test="roleName != null">
+            WHERE role_name LIKE concat('%', #{roleName}, '%')
+        </if>
+    </select>
+
+    <select id="selectRoleByPOJO" parameterType="com.leon.mybatisspring.pojo.TestParams" resultType="role">
+        SELECT id, role_name as roleName, create_date as createDate, note
+        FROM t_role
+        <if test="roleName != null">
+            WHERE role_name LIKE concat('%', #{roleName}, '%')
+        </if>
+    </select>
+
+
 
     <update id="updateRole" parameterType="role">
         UPDATE t_role

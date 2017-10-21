@@ -18,4 +18,5 @@ public interface UserDao {
     int deleteUser(Integer id);
     UserBean getUser(Integer id);
     List<UserBean> findUsers(String roleName, RowBounds rowBounds);
+    List<UserBean> findUserByRoleId(Integer roleId);
 }
