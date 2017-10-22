@@ -55,8 +55,6 @@
         </if>
     </select>
 
-
-
     <update id="updateRole" parameterType="role">
         UPDATE t_role
         <set>

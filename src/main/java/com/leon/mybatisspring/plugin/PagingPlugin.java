@@ -97,7 +97,6 @@ public class PagingPlugin implements Interceptor {
         MetaObject metaObject = SystemMetaObject.forObject(handler);
         Object object = null;
         while (metaObject.hasGetter("h")) {
-            //TODO ?
             object = metaObject.getValue("h");
         }
         if (object == null) {
@@ -189,8 +188,7 @@ public class PagingPlugin implements Interceptor {
 
     private Object changeSQL(Invocation invocation, MetaObject metaObject, BoundSql boundSql, int page, int pageSize) throws Exception {
         String sql = (String) metaObject.getValue("delegate.boundSql.sql");
-        //修改SQL,这里使用Mysql语法,其它数据库需修改为相对应的sql
-        //TODO
+        //TODO 修改SQL,这里使用Mysql语法,其它数据库需修改为相对应的sql
         String newSql = "select * from (" + sql + ")" + "$_paging_table limit ?, ?";
         //修改当前需要执行的SQL
         metaObject.setValue("delegate.boundSql.sql", newSql);
