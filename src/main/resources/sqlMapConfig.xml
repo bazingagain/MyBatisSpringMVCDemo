@@ -24,6 +24,7 @@
         <typeAlias alias="role" type="com.leon.mybatisspring.pojo.RoleBean"/>
         <typeAlias alias="user" type="com.leon.mybatisspring.pojo.UserBean"/>
         <typeAlias alias="file" type="com.leon.mybatisspring.pojo.FileBean"/>
+        <typeAlias alias="procedure" type="com.leon.mybatisspring.pojo.ProcedureBean"/>
     </typeAliases>
 
     <plugins>
@@ -39,6 +40,7 @@
         <mapper resource="mapper/role.xml"/>
         <mapper resource="mapper/user.xml"/>
         <mapper resource="mapper/file.xml"/>
+        <mapper resource="mapper/procedure.xml"/>
     </mappers>
 
 </configuration>
