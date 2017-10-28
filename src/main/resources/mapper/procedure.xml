@@ -3,6 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.leon.mybatisspring.dao.ProcedureDao">
+    <!--1. map方式-->
+    <!--<parameterMap id="getRoleCountMap" type="map">-->
+        <!--<parameter property="roleName" mode="IN" jdbcType="VARCHAR"/>-->
+        <!--<parameter property="result" mode="OUT" jdbcType="int"/>-->
+        <!--<parameter property="execDate" mode="OUT" jdbcType="date"/>-->
+    <!--</parameterMap>-->
+    <!--<select id="count" parameterMap="getRoleCountMap" statementType="CALLABLE">-->
+        <!--{call count_role(?,?)}-->
+    <!--</select>-->
+    <!--2. bean方式-->
     <select id="count" parameterType="procedure" statementType="CALLABLE">
         {call count_role (
         #{roleName, mode=IN, jdbcType=VARCHAR},
