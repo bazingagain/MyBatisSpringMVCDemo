@@ -1,6 +1,6 @@
 Spring-MyBatis Demo
 
-The pupulation is to learn how to use the MyBatis within Spring.
+The purpose is to learn how to use the MyBatis within Spring.
 
 example:
 
